@@ -48,17 +48,13 @@
             "caption"=> "Hashtags im Laufe der Zeit",
           	"captionFontSize"=> "24",
             "captionFontColor"=> "#4D394B",
-            "captionPadding"=> "20",
-            // Schriftart und Schriftgröße
-            "baseFont"=> "Merriweather, sans-serif",
+            // Schriftgröße, Farbe
             "baseFontColor"=> "#ABA39D",
             "outCnvBaseColor"=> "#ABA39D",
             "baseFontSize"=> "15",
             "outCnvBaseFontSize"=> "15",
             // Linien
             "divLineColor"=> "#ABA39D",
-            "divLineAlpha"=> "22",
-            "numDivLines"=> "5",
             // Y-Achse
             "yAxisMinValue"=> "0",
             "yAxisMaxValue"=> "100",
@@ -72,8 +68,6 @@
             "showValues"=> "0",
             "formatNumberScale"=> "0",
             "plotSpacePercent"=> "33",
-            "showcanvasborder"=> "0",
-            "showPlotBorder"=> "0"
           )
     );
     
@@ -88,7 +82,7 @@
 	}
   $jsonEncodedData = json_encode($arrData);
 	// FusionCharts erstellen
-	$postgresChart = new FusionCharts("column2d", "HashtagsChart" , '100%', '450', "postgres-chart", "json", $jsonEncodedData);
+	$postgresChart = new FusionCharts"HashtagsChart" , '100%', '450', "postgres-chart", "json", $jsonEncodedData);
 
   $postgresChart->render();
 	// Datenbank Verbindung schließen
