@@ -56,19 +56,19 @@ cont2['text'] = tags
 
 cont2.drop(cont2.index[len(cont2)-1])#reihe mit leerem hashtag loeschen
 
-indexe=[]#liste erstellen
+liste=[]#liste erstellen
 for idx, x in cont2['text'].iteritems():#hashtags tweet id hinzufuegen
     for k in x:
-	indexe.append(idx)
-indices = []#noch eine liste
+	liste.append(idx)
+liste2 = []#noch eine liste
 for l in cont2['text']:#fue jeden hashtag die hashtag id einfuegen
     for m in l:
-        indices.append(df_tags[df_tags['name'] == m].index.tolist())
+        liste2.append(df_tags[df_tags['name'] == m].index.tolist())
 
 
-df_contains['h_id'] = [lis[0] for lis in indices]#in entsprechender zeile speichern
+df_contains['h_id'] = [lis[0] for lis in liste2]#in entsprechender zeile speichern
 
-df_contains['t_id'] = indexe
+df_contains['t_id'] = liste
 
 df_contains.to_csv('contains.csv', sep=';')#speichern 
 
@@ -76,16 +76,10 @@ df_contains.to_csv('contains.csv', sep=';')#speichern
 df_pairs = pd.DataFrame(columns=['h_id1','h_id2'])#jetzt noch paarweises auftreten 
 
 
-def contains_tupel(x,y):#gucken ob hashtags auch in anderer reihenfolge auftreten
-    for i in range(len(h_id1)):
-        if h_id1[i]==x and h_id2[i]==y:
-            return i
-    return None
-
 h_id1 = []
 h_id2 = []
 
-#durch die tweet liste gehen und wenn tweet mehr als einen hashtag enthaelt->contains_tupel
+#durch die tweet liste gehen
 #fuege jeweils in listen ein
 for idx,x in cont2['text'].iteritems():
     if len(x) >= 2:
@@ -95,13 +89,9 @@ for idx,x in cont2['text'].iteritems():
             while j<len(x):
                 id1 = df_tags[df_tags['name'] == x[i]].index.tolist()
                 id2 = df_tags[df_tags['name'] == x[j]].index.tolist()
-                if contains_tupel(id1[0],id2[0])is not None:
-                    index = contains_tupel(id1,id2)
-                elif contains_tupel(id2[0],id1[0])is not None:
-                    index = contains_tupel(id2,id1)
-                else:
-                    h_id1.append(id1[0])
-                    h_id2.append(id2[0])
+                h_id1.append(id1[0])
+                h_id2.append(id2[0])
+		
                 j += 1
 	    i +=1
 
