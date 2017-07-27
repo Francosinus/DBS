@@ -3,7 +3,7 @@ import sklearn.cluster
 import distance
 import csv
 
-inpute = open("/home/franko/Downloads/noduplicates.csv","r")
+inpute = open("/home/franko/DBS Projekt/noduplicates.csv","r")
 reader=csv.reader(inpute, delimiter=";")
 output=open("/home/franko/DBS Projekt/cluster.csv", "w")
 writer= csv.writer(output)
